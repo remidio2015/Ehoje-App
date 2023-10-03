@@ -29,7 +29,7 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F95A5F',
     paddingTop: '3%',
     paddingLeft: '5%',
     paddingRight: '5%',
