@@ -69,7 +69,33 @@ export default function App() {
 
           }
         )} component={Cadastro} />
-        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+        <Stack.Screen name="ResetPassword"  options={({ navigation, route })=>(
+          {headerTitle: () => <Text style={styles.title}>Redefinir Senha</Text>, headerTitleAlign: 'center',    headerStyle: {
+            backgroundColor: '#fff',
+            elevation:0,
+            borderWidth: 0,
+            textAlign:"center",
+            flex:1 ,
+            alignSelf: 'center',
+            shadowOpacity: 0,
+ 
+          },
+          headerTintColor: '#0000',
+          headerShadowVisible: false,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            backgroundColor: 'red',
+          }, 
+          headerRight: () => (
+            <Pressable style={styles.button} color="transparent"  onPress={()=>{
+              navigation.navigate('Login')
+            }} accessibilityLabel={'Botão para ir para a tela de login'}>
+            <Text style={styles.text}>Login</Text>
+          </Pressable>
+          ),
+
+          }
+        )} component={ResetPassword} />
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
