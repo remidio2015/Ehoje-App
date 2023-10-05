@@ -1,49 +1,39 @@
 import { StatusBar } from 'expo-status-bar'
 import Input from '../Components/Input'
 import Button from '../Components/Button'
-import { Formik } from 'formik'
-import { StyleSheet, Text, View,SafeAreaView,TouchableOpacity } from 'react-native'
 
-export default function Login({navigation}) {
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native'
+import {loginValidationsSchema}from '../validations/Form'
+
+export default function Login({ navigation }) {
   return (
-    
-    
-<SafeAreaView style={styles.container}>
-<View style={styles.containerWrapper}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.containerWrapper}>
+        <Formik validationSchema={loginValidationsSchema} initialValues={{ Email: '', Password: '' }} onSubmit={(values) => alert(values)}>
+          {
+            ({
+              handleChange,
+              handleSubmit,
+              values, 
+              errors,
+              isValid
+            }) => (<>
+              <View style={styles.containerInput}>
+                <Input name="Email" onChange={handleChange('Email')} value={values.Email} type="text" placeholder="Email" />
+                {errors.Email && <Text style={styles.textError} >{errors.Email}</Text>}
+              </View>
+              <View style={styles.containerInput}>
+                <Input name="Password" onChange={handleChange('Password')} value={values.Password} type="password" placeholder="Senha" />
+                {errors.Password && <Text style={styles.textError}>{errors.Password}</Text>}
+              </View>
 
-<Formik initialValues={{Email: '', Password:''}} onSubmit={(valures)=> alert(values)}>
+              <View style={styles.containerButton}>
+                <Button title="Log In" onPress={handleSubmit} />
+              </View>
+            </>)
+          }
 
-  {
-({
- handleChange,
- handleSubmit,
- values,
- errors,
- isValid
-
-
-})=>(<> <View style={styles.containerInput}>
-  <Input name="Email" type="text" placeholder="Email" />
-</View>
-<View style={styles.containerInput}>
-  <Input name="Password" type="password" placeholder="Senha" />
-</View>
-
-<View style={styles.containerButton}>
-  <Button title="Log In" onPress={()=>alert('login')} />
-</View></>)
-
-  }
-
-
-  
-       
-
-</Formik>
-
-
-      
-
+        </Formik>
         <TouchableOpacity style={styles.containerResetPassword} onPress={() => navigation.navigate('ResetPassword')}>
           <Text style={styles.containerResetPasswordLinkContentText}>Esqueceu sua senha?</Text>
         </TouchableOpacity>
@@ -55,7 +45,7 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F95A5F',
+    backgroundColor: '#fff',
     paddingTop: '3%',
     paddingLeft: '5%',
     paddingRight: '5%',
@@ -65,23 +55,27 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-  containerInput:{
+  containerInput: {
     paddingTop: 18,
   },
-  containerButton:{
-    paddingTop: 18,
-    width: '100%',
-  },
-  containerResetPassword:{
+  containerButton: {
     paddingTop: 18,
     width: '100%',
   },
-  containerResetPasswordLinkContentText:{
+  containerResetPassword: {
+    paddingTop: 18,
+    width: '100%',
+  },
+  containerResetPasswordLinkContentText: {
     textAlign: 'center',
     color: '#C42C2C',
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
+  },
+  textError:{
+color:'red'
+
   }
 })
