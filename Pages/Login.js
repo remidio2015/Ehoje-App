@@ -3,13 +3,14 @@ import Input from '../Components/Input'
 import Button from '../Components/Button'
 
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native'
+import { Formik } from 'formik'
 import {loginValidationsSchema}from '../validations/Form'
 
 export default function Login({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerWrapper}>
-        <Formik validationSchema={loginValidationsSchema} initialValues={{ Email: '', Password: '' }} onSubmit={(values) => alert(values)}>
+        <Formik validationSchema={loginValidationsSchema} initialValues={{ Email: '', Password: '' }} onSubmit={(values) => navigation.navigate('Home')}>
           {
             ({
               handleChange,

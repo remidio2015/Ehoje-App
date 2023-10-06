@@ -26,20 +26,23 @@ export default function Home() {
 {
 
   (
-    handleChange,
+   { handleChange,
     handleSubmit,
     values, 
     errors,
     isValid
-  )=>(
+   })=>(
 <><View style={styles.containerInput}>
-          <Input name="Email" onChange={()=>null} type="text" placeholder="Email" />
+          <Input name="Email" onChange={handleChange('Email')} value={values.Email} type="text" placeholder="Email" />
+          {errors.Email && <Text style={styles.textError} >{errors.Email}</Text>}
         </View>
         <View style={styles.containerInput}>
-          <Input name="CPF" onChange={()=>null} type="text" placeholder="CPF" />
+          <Input name="CPF" onChange={handleChange('CPF')} value={values.CPF} type="text" placeholder="CPF" />
+          {errors.CPF && <Text style={styles.textError}>{errors.CPF}</Text>}
         </View>
         <View style={styles.containerInput}>
-          <Input name="Password" onChange={()=>null} type="password" placeholder="Senha" />
+          <Input name="Password" onChange={handleChange('Password')} value={values.Password} type="password" placeholder="Senha" />
+          {errors.Password && <Text style={styles.textError}>{errors.Email}</Text>}
         </View>
 
         <View style={styles.containerTerms}>
@@ -68,7 +71,7 @@ export default function Home() {
       
 
         <View style={styles.containerButton}>
-          <Button title="Cadastrar-se" onPress={() => alert('se cadastrou')} />
+          <Button title="Cadastrar-se" onPress={handleSubmit} />
         </View>
         </Formik>
   
@@ -109,4 +112,9 @@ const styles = StyleSheet.create({
   textTermsLink: {
     color: '#83B6CC',
   },
+
+textError:{
+color:'red'
+
+}
 })
