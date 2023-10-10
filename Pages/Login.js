@@ -1,14 +1,20 @@
 import { StatusBar } from 'expo-status-bar'
 import Input from '../Components/Input'
 import Button from '../Components/Button'
-
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, ImageBackground } from 'react-native'
 import { Formik } from 'formik'
 import {loginValidationsSchema}from '../validations/Form'
 
+
+const image= require('../assets/images/capa.jpg');
+
+
 export default function Login({ navigation }) {
   return (
+    
+
     <SafeAreaView style={styles.container}>
+      <ImageBackground source={image} resizeMode='cover' style={styles.image}>
       <View style={styles.containerWrapper}>
         <Formik validationSchema={loginValidationsSchema} initialValues={{ Email: '', Password: '' }} onSubmit={(values) => navigation.navigate('Home')}>
           {
@@ -39,7 +45,10 @@ export default function Login({ navigation }) {
           <Text style={styles.containerResetPasswordLinkContentText}>Esqueceu sua senha?</Text>
         </TouchableOpacity>
       </View>
+      </ImageBackground>
     </SafeAreaView>
+   
+    
   )
 }
 
@@ -77,6 +86,8 @@ const styles = StyleSheet.create({
   },
   textError:{
 color:'red'
-
+},
+  image:{
+    flex:1,
   }
 })
